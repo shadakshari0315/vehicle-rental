@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: #f4f7fb; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+
+/* Authentication screens */
+.auth-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-image: linear-gradient(115deg, rgba(5, 15, 34, .91), rgba(8, 42, 78, .72)),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2200&q=85");
+  background-size: cover;
+  background-position: center;
+}
+.auth-page::before, .auth-page::after {
+  content: ""; position: absolute; z-index: -1; border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50%; width: 460px; height: 460px; right: -140px; top: -180px;
+}
+.auth-page::after { width: 620px; height: 620px; right: -220px; top: -260px; }
+.auth-page > div {
+  position: relative; width: min(100%, 460px); border: 1px solid rgba(255,255,255,.55);
+  border-radius: 26px; box-shadow: 0 28px 90px rgba(0,0,0,.34);
+  animation: card-enter .55s ease both;
+}
+.auth-page input { transition: border-color .2s, box-shadow .2s, background .2s; }
+.auth-page input:focus { box-shadow: 0 0 0 4px rgba(37,99,235,.13); }
+.auth-page button[type="submit"] { letter-spacing: .01em; transition: transform .2s, box-shadow .2s; }
+.auth-page button[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(37,99,235,.25); }
+
+/* Customer workspace */
+.customer-shell { background: linear-gradient(180deg, #edf4fb 0%, #f7f9fc 48%, #f4f7fb 100%); }
+.customer-shell nav {
+  border-color: rgba(215,226,239,.85); background: rgba(255,255,255,.91);
+  box-shadow: 0 5px 24px rgba(20,44,75,.06); backdrop-filter: blur(16px);
+}
+.customer-shell nav a:first-child span { box-shadow: 0 8px 18px rgba(37,99,235,.28); }
+.customer-shell nav a { transition: all .2s ease; }
+.customer-shell nav a:hover { transform: translateY(-1px); }
+.customer-dashboard, .vehicle-page, .rentals-page { position: relative; background: transparent; }
+.customer-dashboard::before, .vehicle-page::before, .rentals-page::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 300px; z-index: 0; pointer-events: none;
+  background: linear-gradient(115deg, rgba(11,36,67,.92), rgba(22,82,133,.72)),
+    url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80") center 48%/cover;
+  clip-path: polygon(0 0,100% 0,100% 78%,0 100%);
+}
+.customer-dashboard > div, .vehicle-page > div, .rentals-page > div { position: relative; z-index: 1; }
+.customer-dashboard h1, .vehicle-page h1, .rentals-page h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.22); }
+.customer-dashboard > div > div:first-child p, .vehicle-page > div > p, .rentals-page > div > p { color: rgba(255,255,255,.82); }
+.customer-dashboard .grid > div, .rentals-page .grid > div, .vehicle-page .grid > div {
+  border-color: rgba(220,230,241,.9); box-shadow: 0 12px 32px rgba(26,54,87,.07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.customer-dashboard .grid > div:hover, .rentals-page .grid > div:hover, .vehicle-page .grid > div:hover {
+  transform: translateY(-5px); box-shadow: 0 20px 38px rgba(26,54,87,.13);
+}
+.customer-dashboard .bg-blue-600 {
+  background-image: linear-gradient(105deg, rgba(8,39,73,.96), rgba(23,94,153,.79)),
+    url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover; background-position: center 55%;
+  box-shadow: 0 18px 40px rgba(15,65,110,.2);
+}
+
+/* Vehicle cards get a photo banner, while all booking data remains unchanged. */
+.vehicle-page .grid > div { overflow: hidden; padding-top: 0; }
+.vehicle-page .grid > div::before {
+  content: ""; display: block; height: 150px; margin: 0 -1.5rem 1.25rem;
+  background-position: center; background-size: cover;
+  background-image: linear-gradient(0deg, rgba(8,25,45,.1), rgba(8,25,45,.02)), url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80");
+}
+.vehicle-page .grid > div:nth-child(3n + 2)::before { background-image: url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80"); }
+.vehicle-page .grid > div:nth-child(3n)::before { background-image: url("https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=80"); }
+.vehicle-page .grid > div > * { position: relative; }
+
+/* Rental cards */
+.rentals-page .grid > div { border-radius: 20px; background: rgba(255,255,255,.96); }
+
+/* Admin workspace */
+.admin-shell { background: #f3f6fb; }
+.admin-shell aside {
+  background: linear-gradient(165deg, #071a31 0%, #102f50 58%, #0b2340 100%);
+  box-shadow: 10px 0 35px rgba(13,35,62,.12);
+}
+.admin-shell aside h1 { letter-spacing: -.04em; }
+.admin-shell aside nav a { border: 1px solid transparent; }
+.admin-shell aside nav a:hover { border-color: rgba(255,255,255,.1); transform: translateX(3px); }
+.admin-shell main { background-image: radial-gradient(circle at 95% 3%, rgba(59,130,246,.08), transparent 24rem); }
+.admin-shell main .bg-white { box-shadow: 0 10px 30px rgba(23,48,78,.055); }
+.admin-shell main table thead { background: #edf3fa; }
+.admin-shell main table tbody tr { transition: background .18s; }
+
+@keyframes card-enter { from { opacity: 0; transform: translateY(16px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 640px) {
+  .auth-page { padding: 24px 16px; }
+  .auth-page > div { padding: 26px 22px; }
+  .customer-dashboard::before, .vehicle-page::before, .rentals-page::before { height: 260px; }
+  .vehicle-page .grid > div::before { height: 125px; }
+}
+
+/* Remove background image from Vehicles page */
+.vehicle-page::before {
+    background: linear-gradient(
+        115deg,
+        rgba(11, 36, 67, 0.96),
+        rgba(22, 82, 133, 0.92)
+    );
+}
+
+/* Remove images from vehicle cards */
+.vehicle-page .grid > div::before {
+    display: none;
+    content: none;
+}
+
+/* Restore normal vehicle card spacing */
+.vehicle-page .grid > div {
+    padding-top: 1.5rem;
+}
